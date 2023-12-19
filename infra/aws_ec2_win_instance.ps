@@ -1,0 +1,26 @@
+# Set your AWS region and other parameters
+$region = "your_region"
+$instanceType = "t2.micro"
+$amiId = "ami-xxxxxxxxxxxxxxxxx"  # Replace with the desired AMI ID
+$keyName = "your_key_pair_name"
+$securityGroupId = "your_security_group_id"
+$subnetId = "your_subnet_id"
+
+# Create a new EC2 instance
+$instance = New-EC2Instance `
+    -ImageId $amiId `
+    -InstanceType $instanceType `
+    -KeyName $keyName `
+    -SecurityGroupId $securityGroupId `
+    -SubnetId $subnetId `
+    -Region $region
+
+# Output the instance ID
+Write-Host "Instance $($instance.Instances[0].InstanceId) is being created."
+
+# Optional: Add a delay to wait for the instance to be fully created before further actions
+# You can adjust the Start-Sleep duration based on your requirements
+Start-Sleep -Seconds 30
+
+# Optional: Describe the instance to get more information
+(Get-EC2Instance -InstanceId $instance.Instances[0].InstanceId -Region $region).Instances
