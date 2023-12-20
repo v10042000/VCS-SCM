@@ -1,0 +1,9 @@
+...
+. name : vamsi
+  host : all 
+ source : yes 
+ tasks : 
+ - name : check 
+ command : hostname
+
+...
